@@ -133,7 +133,8 @@ def num_b5(q_num):
 
 questions = []
 x = 0
-qs_0 = qs - 1
+qs = int(q_num)
+qs_0 = qs- 1
 if qs == 0:
   qs = qs + 1
 for i in range(qs):
