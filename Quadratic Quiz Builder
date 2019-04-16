@@ -143,5 +143,5 @@ for i in range(qs):
       print("You scored a 0%")
     else:
       new_score = (score/qs) * 100
-      print("You scored a " + (str(new_score)) + "%")
+      print("You socred a " + (str(new_score)) + "%")
 
