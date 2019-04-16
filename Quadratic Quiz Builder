@@ -1,0 +1,147 @@
+import numpy
+import random as r
+from sympy import *
+import sympy
+quiz_type = input("Would you like to take a quiz. ")
+score = 0
+answers = 0
+
+def DBPL(score, answers):
+  print("Here is a problem.")
+  x = symbols("x")
+  x1 = symbols("x1")
+  y = symbols("y")
+  y1 = symbols("y1")
+  b = symbols("b")
+  m = symbols("m")
+  expr1 = m*x + b 
+  expr2 = sympy.sqrt(((x - x1)**2) + ((y - y1)**2))
+  r1 = r.randint(-5, -1)
+  r2 = r.randint(-20, 20)
+  r1_b = r.randint(-5, 5)
+  r2_b = r.randint(-8, 8)
+  expr1 = expr1.subs(m, r1)
+  expr1 = expr1.subs(b, r2)
+  expr2 = expr2.subs(x1, r1_b)
+  expr2 = expr2.subs(y1, r2_b)
+  m1 = (-(1 / r1))
+  expr3 = m1 * x + ((-x1 * m1) + y1)
+  expr3 = expr2.subs(x1, r1_b)
+  expr3 = expr2.subs(y1, r2_b)
+  print("(" + (str(r1_b)) + ", " + str(r2_b) + ")")
+  p_answer = input("given that point, what is the distance from that to a line y = " + (str(expr1)) + " Tip: Write in the following form: 15 and such. Remeber to round to the nearest tenth place! ")
+  x_s = (r1) - (m1)
+  b_s = ((-r1_b * m1) + r2_b) - (r2)
+  Ipx = (x_s) / (b_s)
+  Ipx = round(Ipx, 1)
+  Ipy = (r1 * Ipx) + r2
+  Ipy = round(Ipy, 1)
+  expr2 = expr2.subs(x, Ipx)
+  expr2 = expr2.subs(y, Ipy)
+  ans = "(" + str(Ipx) + ", " + str(Ipy) + ")"
+  if p_answer == ans:
+    score = score + 1 
+    answers = answers + 1
+    print("Correct!")
+    return score 
+  else:
+    score = 0
+    answers = answers + 1
+    print("Wrong, the correct answer is " + str(ans))
+    return score
+    
+def PIBL(score, answers):
+  print("Here is a problem.")
+  x = symbols("x")
+  b = symbols("b")
+  m = symbols("m")
+  expr1 = m*x + b 
+  expr2 = m*x +b
+  r1 = r.randint(-5, 5)
+  r2 = r.randint(-20,20 )
+  r1_b = r.randint(-5, -5)
+  r2_b = r.randint(-20, 20)
+  expr1 = expr1.subs(m, r1)
+  expr1 = expr1.subs(b, r2)
+  expr2 = expr2.subs(m, r1_b)
+  expr2 = expr2.subs(b, r2_b)
+  print((str(expr1)) + " = " + (str(expr2)))
+  p_answer = input("What is the intersection point of those two lines? Tip: Write in the following form: (2, -4) and such. Remeber to round to the nearest tenth place! ")
+  x_s = (r1) - (r1_b)
+  b_s = (r2_b) - (r2)
+  ca1 = (b_s) / (x_s)
+  ca1 = round(ca1, 1)
+  ca2 = (ca1 * r1) + r2
+  comp_answer_p1 = ("(" + (str(int(ca1))) + ", " + (str((int(ca2)))))
+  if p_answer== comp_answer_p1:
+    score = score + 1 
+    answers = answers + 1
+    print("Correct!")
+    return score 
+  else:
+    score = 0
+    answers = answers + 1
+    print("Wrong, the correct answer is " + comp_answer_p1)
+    return score
+
+def QE(score, answers):
+  print("Here is a problem.")
+  x = symbols("x")
+  b = symbols("b")
+  c = symbols("c")
+  expr = (x + b)*(x + c)
+  expr_expanded  = expand(expr) 
+  r1 = r.randint(1, 20)
+  r2 = r.randint(-20, -1)
+  expr_expanded = expr_expanded.subs(b, r1)
+  expr_expanded = expr_expanded.subs(c, r2)
+  print((str(expr_expanded)) + " = 0")
+  p_answer = input("What is x? Tip: Write in the following form: 2, -4 and such. ")
+  ca1 = -1 * r1
+  ca2 = -1 * r2
+  comp_answer_p1 = ((str(r1)) + ", " + (str(r2)))
+  comp_answer_p2 = ((str(r2)) + ", " + (str(r1)))
+  if p_answer== comp_answer_p1 or p_answer == comp_answer_p2:
+    score = score + 1 
+    answers = answers + 1
+    print("Correct!")
+    return score
+  else:
+    score = 0
+    answers = answers + 1
+    print("Wrong, the correct answer is " + comp_answer_p1)
+    return score
+    
+q_num = input("How many questions do you want to be on your quiz? 1, 2, 3, 4? Maybe more? ")
+questions = []
+x = 0
+ny = 1
+for i in range(100):
+  if q_num != str(ny):
+    ny = ny + 1
+  if ny == 100:
+    q_num = 1
+qs = (int(q_num))
+qs_0 = qs - 1
+if qs == 0:
+  qs = qs + 1
+for i in range(qs):
+  question = input("What type of question do you desire? You can pick a 1. Quadratic Equation, 2. Point of Intersection Between Two Lines, 3. Distance Between a Point and a Line. Answer with 1, 2, or 3. ")
+  questions.append(question)
+for i in range(qs):
+  if questions[x] == "1":
+    score = QE(score, answers)
+    x = x + 1
+  elif questions[x] == "2":
+    score = PIBL(score, answers)
+    x = x + 1
+  else:
+    score = DBPL(score, answers)
+    x = x + 1
+  if x == qs:
+    if score == 0:
+      print("You scored a 0%")
+    else:
+      new_score = (score/qs) * 100
+      print("You scored a " + (str(new_score)) + "%")
+
