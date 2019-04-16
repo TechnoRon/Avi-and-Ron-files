@@ -90,7 +90,7 @@ def QE(score, answers):
   b = symbols("b")
   c = symbols("c")
   expr = (x + b)*(x + c)
-  expr_expanded  = expand(expr) 
+  expr_expanded = expand(expr) 
   r1 = r.randint(1, 20)
   r2 = r.randint(-20, -1)
   expr_expanded = expr_expanded.subs(b, r1)
@@ -112,16 +112,27 @@ def QE(score, answers):
     print("Wrong, the correct answer is " + comp_answer_p1)
     return score
     
-q_num = input("How many questions do you want to be on your quiz? 1, 2, 3, 4? Maybe more? ")
+q_num = 0
+
+#function for button 1
+
+def num_b1(q_num):
+  q_num = 1
+ 
+def num_b2(q_num):
+  q_num = 2
+  
+def num_b3(q_num):
+  q_num = 3
+
+def num_b4(q_num):
+  q_num = 4
+
+def num_b5(q_num):
+  q_num = 5
+
 questions = []
 x = 0
-ny = 1
-for i in range(100):
-  if q_num != str(ny):
-    ny = ny + 1
-  if ny == 100:
-    q_num = 1
-qs = (int(q_num))
 qs_0 = qs - 1
 if qs == 0:
   qs = qs + 1
